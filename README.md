@@ -11,3 +11,6 @@ Returns the `maxSize`, or `size` of a field, if either exists.  Otherwise return
 or
 
 `gorm.limit(clazz: 'package.className', field: 'fieldName')`
+
+
+See tests for examples: https://github.com/ishults/gorm-taglib/blob/master/test/unit/com/igor/GormTagLibSpec.groovy
