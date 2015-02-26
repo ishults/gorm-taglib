@@ -18,7 +18,7 @@ class GormTagLibSpec extends Specification {
             null                         | 'username'
             GormTagLibUser.canonicalName | null
             'NoSuchClass'                | 'username'
-            'GormTagLibUser'             | 'username' // Needs package name
+            GormTagLibUser.simpleName    | 'username' // Needs package name
             GormTagLibUser.canonicalName | 'NoSuchField'
     }
 
