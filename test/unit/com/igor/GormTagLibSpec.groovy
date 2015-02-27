@@ -3,6 +3,7 @@ package com.igor
 import grails.test.mixin.*
 import org.codehaus.groovy.grails.web.taglib.exceptions.GrailsTagException
 import spock.lang.Specification
+import spock.lang.Unroll
 
 @TestFor(GormTagLib)
 class GormTagLibSpec extends Specification {
@@ -21,7 +22,7 @@ class GormTagLibSpec extends Specification {
             GormTagLibUser.simpleName    | 'username' // Needs package name
             GormTagLibUser.canonicalName | 'NoSuchField'
     }
-
+@Unroll
     void "limit() should return the max size of a field if it is present, or otherwise null"() {
         when:
             String value = tagLib.limit(clazz: GormTagLibUser.canonicalName, field: fieldName)
@@ -32,9 +33,9 @@ class GormTagLibSpec extends Specification {
         where:
             fieldName    | expectedValue
             'username'   | 50
-            'firstName'  | 20
+            'firstName'  | 25
             'middleName' | ''
-            'lastName'   | 30
+            'lastName'   | 20
             'age'        | ''
     }
 }
