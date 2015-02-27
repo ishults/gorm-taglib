@@ -8,10 +8,10 @@ class GormTagLib {
 
     /**
      * Returns the max length of a field for a given domain.
-     * Prioritizes 'maxSize', then 'size'.  If neither is found, returns empty string.
+     * If both 'maxSize' and 'size' are used, returns the lesser.  If neither is found, returns empty string.
      *
      * @attr clazz REQUIRED The full class name of the domain object being referenced
-     * @attr field REQUIRED The property to look up the max length
+     * @attr field REQUIRED The field for which to look up the max length
      */
     def limit = { attrs ->
         String className = attrs.clazz
@@ -43,8 +43,15 @@ class GormTagLib {
             return
         }
 
-        out << (fieldConstraint.getAppliedConstraint('maxSize')?.maxSize ?:
-            fieldConstraint.getAppliedConstraint('size')?.range?.to ?:
-                '')
+        Integer maxSize = fieldConstraint.getAppliedConstraint('maxSize')?.maxSize
+        Integer size = fieldConstraint.getAppliedConstraint('size')?.range?.to
+
+        if (maxSize && size) {
+            out << Math.min(maxSize, size)
+
+            return
+        }
+
+        out << (maxSize ?: size ?: '').toString()
     }
 }
