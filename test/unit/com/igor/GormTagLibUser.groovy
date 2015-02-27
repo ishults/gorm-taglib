@@ -12,7 +12,7 @@ class GormTagLibUser {
 
     static constraints = {
         username(maxSize: 50)
-        firstName(size: 0..20)
+        firstName(size: 0..25)
         middleName()
         lastName(size: 0..20, maxSize: 30)
     }
